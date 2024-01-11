@@ -8,17 +8,17 @@
 
 // Representación de las cartas
 char *values[] = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
-char *suits[] = {"Corazones", "Diamantes", "Picas", "Tréboles"};
+char *suits[] = {"Hearts", "Diamonds", "Spades", "Clubs"};
 
 // Estructura para una carta
-struct carta {
+struct card {
     char *value;
     char *suit;
     int numericValue;
 };
 
-struct carta deck[TOTAL_CARDS];
-struct carta playerHand[MAX_HAND];
+struct card deck[TOTAL_CARDS];
+struct card playerHand[MAX_HAND];
 int numPlayerCards = 0;
 int playerSum = 0;
 char choice;
@@ -37,17 +37,17 @@ void shuffleDeck() {
     srand(time(NULL));
     for (int i = 0; i < TOTAL_CARDS; i++) {
         int j = rand() % TOTAL_CARDS;
-        struct carta temp = deck[i];
+        struct d temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
     }
 }
 
-void showCard(struct carta c) {
+void showCard(struct card c) {
     printf("  %s de %s\n", c.value, c.suit);
 }
 
-int sumHand(struct carta hand[], int numCards) {
+int sumHand(struct card hand[], int numCards) {
     int sum = 0;
     for (int i = 0; i < numCards; i++) {
         sum += hand[i].numericValue;
