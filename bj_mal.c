@@ -37,14 +37,14 @@ void shuffleDeck() {
     srand(time(NULL));
     for (int i = 0; i < TOTAL_CARDS; i++) {
         int j = rand() % TOTAL_CARDS;
-        struct d temp = deck[i];
+        struct card temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
     }
 }
 
 void showCard(struct card c) {
-    printf("  %s de %s\n", c.value, c.suit);
+    printf("  %s of %s\n", c.value, c.suit);
 }
 
 int sumHand(struct card hand[], int numCards) {
@@ -59,39 +59,39 @@ int main() {
     initializeDeck();
     shuffleDeck();
 
-    printf("Bienvenido al Blackjack!\n");
+    printf("Wellcome To The Blackjack!\n");
 
     playerHand[numPlayerCards++] = deck[0];
     playerHand[numPlayerCards++] = deck[1];
     playerSum = sumHand(playerHand, numPlayerCards);
 
-    printf("Tus cartas:\n");
+    printf("Your Cards:\n");
     showCard(playerHand[0]);
     showCard(playerHand[1]);
-    printf("Suma total: %d\n", playerSum);
+    printf("Total Sum: %d\n", playerSum);
 
     while (playerSum < 21) {
-        printf("¿Quieres otra carta? (s/n): ");
+        printf("Do you want an other card? (y/n): ");
         scanf(" %c", &choice);
 
-        if (choice == 's' || choice == 'S') {
+        if (choice == 'y' || choice == 'Y') {
             playerHand[numPlayerCards] = deck[numPlayerCards + 1];
             playerSum = sumHand(playerHand, ++numPlayerCards);
 
-            printf("Nueva carta:\n");
+            printf("New card:\n");
             showCard(playerHand[numPlayerCards - 1]);
-            printf("Suma total: %d\n", playerSum);
+            printf("New Total: %d\n", playerSum);
         } else {
             break;
         }
     }
 
     if (playerSum == 21) {
-        printf("¡Blackjack! Has ganado.\n");
+        printf("¡Blackjack! You win.\n");
     } else if (playerSum > 21) {
-        printf("Te has pasado. Fin del juego.\n");
+        printf("You got over 21. You lose. End of the Game.\n");
     } else {
-        printf("Te has plantado con %d. Fin del juego.\n", playerSum);
+        printf("You stopped at %d. End of the Game.\n", playerSum);
     }
 
     return 0;
