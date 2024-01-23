@@ -35,8 +35,8 @@ void initializeDeck() {
 
 void shuffleDeck() {
     srand(time(NULL));
-    for (int i = 0; i < TOTAL_CARDS; i++) {
-        int j = rand() % TOTAL_CARDS;
+    for (int i = TOTAL_CARDS; i > 0; i--) {
+        int j = rand() % (i+1);
         struct card temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
